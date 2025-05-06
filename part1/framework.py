@@ -37,7 +37,7 @@ def make_system_prompt(suffix: str) -> str:
     )
 
 # Change model here
-llm = ChatOpenAI(model="gpt-4o-mini")
+llm = ChatOpenAI(model="gpt-4o")
 
 def get_next_node(last_message: BaseMessage, goto: str):
     if "FINAL ANSWER" in last_message.content:
@@ -72,6 +72,7 @@ advisor_agent = create_react_agent(
         " Base your assessment solely on the research data provided by your researcher colleague."
         " Your job is to deliver a clear recommendation: pursue or do not pursue the startup idea."
         " Support your decision with market size, competitive landscape, consumer demand, and any other relevant quantitative or qualitative data."
+        " If an idea makes no sense logically then say the idea is not viable. DO NOT BE OVERLY OPTIMISTIC."
     ),
 )
 
