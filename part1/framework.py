@@ -42,10 +42,12 @@ tavily_tool = TavilySearchResults(max_results=5)
 # create common system prompt for both agents
 def make_system_prompt(suffix: str) -> str:
     return (
-        "You are a helpful AI assistant, collaborating with other assistants. "
-        "Use the provided tools to progress towards answering the question. "
-        "If you are unable to fully answer, another assistant with different tools will help. "
-        "If the final answer is found, prefix your response with FINAL ANSWER."
+        "You are a helpful AI assistant, collaborating with other assistants."
+        " Use the provided tools to progress towards answering the question."
+        " If you are unable to fully answer, that's OK, another assistant with different tools "
+        " will help where you left off. Execute what you can to make progress."
+        " If you or any of the other assistants have the final answer or deliverable,"
+        " prefix your response with FINAL ANSWER so the team knows to stop."
         f"\n{suffix}"
     )
 
@@ -54,17 +56,23 @@ research_agent = create_react_agent(
     llm,
     tools=[tavily_tool],
     prompt=make_system_prompt(
-        "You are a research assistant helping evaluate startup ideas. "
-        "Your job is to gather market data, trends, and competitors. Do NOT make recommendations."
+        "You are a research assistant helping evaluate startup ideas."
+        " Your job is to gather relevant market data, consumer trends, and competitor insights from the past year."
+        " You must not make recommendations or evaluations—leave that to your colleague."
+        " Use the available tools to collect data that your advisor teammate can use to assess viability."
     ),
 )
+
 
 advisor_agent = create_react_agent(
     llm,
     tools=[],
     prompt=make_system_prompt(
-        "You are a startup advisor evaluating business ideas. "
-        "Make a decision based on the research: pursue or not pursue. Be objective and logical."
+        "You are a startup advisor tasked with evaluating the viability of business ideas."
+        " Base your assessment solely on the research data provided by your researcher colleague."
+        " Your job is to deliver a clear recommendation: pursue or do not pursue the startup idea."
+        " Support your decision with market size, competitive landscape, consumer demand, and any other relevant quantitative or qualitative data."
+        " If an idea makes no sense logically then say the idea is not viable. DO NOT BE OVERLY OPTIMISTIC."
     ),
 )
 
