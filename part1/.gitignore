@@ -1,2 +1,4 @@
 .venv
 api.txt
+.env
+.DS_Store
