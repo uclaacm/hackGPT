@@ -1,7 +1,7 @@
 import os
 import streamlit as st
 
-from langchain_openai import ChatOpenAI
+from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_community.tools.tavily_search import TavilySearchResults
 from langgraph.prebuilt import create_react_agent
 from langchain_core.messages import BaseMessage, HumanMessage
@@ -20,13 +20,13 @@ submit = st.button("Submit", disabled=(not user_prompt))
 
 # create sidebar for API keys
 st.sidebar.header("API Keys")
-openai_api_key = st.sidebar.text_input("OpenAI API Key", type="password")
+openai_api_key = st.sidebar.text_input("Google API Key", type="password")
 tavily_api_key = st.sidebar.text_input("Tavily API Key", type="password")
 
 # takes the keys the user typed in and sets them as environment variables
 # necessary when using langchain and tavily because they read keys from the environment variables
 if openai_api_key:
-    os.environ["OPENAI_API_KEY"] = openai_api_key
+    os.environ["GOOGLE_API_KEY"] = openai_api_key
 if tavily_api_key:
     os.environ["TAVILY_API_KEY"] = tavily_api_key
 
@@ -36,7 +36,7 @@ if not openai_api_key or not tavily_api_key:
     st.stop()
 
 # initialize models
-llm = ChatOpenAI(model="gpt-4o")
+llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash-preview-04-17")
 tavily_tool = TavilySearchResults(max_results=5)
 
 # create common system prompt for both agents
