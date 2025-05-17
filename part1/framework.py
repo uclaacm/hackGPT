@@ -56,6 +56,7 @@ llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash-preview-04-17")
 tavily_tool = TavilySearchResults(max_results=5)
 
 # create common system prompt for both agents
+# suffix allows us to pass in different prompts for each agent
 def make_system_prompt(suffix: str) -> str:
     return (
         "You are a helpful AI assistant, collaborating with other assistants."
