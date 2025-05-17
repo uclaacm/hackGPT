@@ -1,12 +1,28 @@
+# Provides access to operating system functionality like setting environment variables
 import os
+# Streamlit library for creating web applications with minimal code
 import streamlit as st
 
+# Google's generative AI model integration for LangChain
 from langchain_google_genai import ChatGoogleGenerativeAI
+# Tool for performing web searches using the Tavily search API
 from langchain_community.tools.tavily_search import TavilySearchResults
+# Creates an agent that follows the ReAct (Reasoning and Acting) pattern
 from langgraph.prebuilt import create_react_agent
+# Message classes for structuring conversation in LangChain:
+# - BaseMessage: Abstract base class for all message types in LangChain, defining the core structure
+# - HumanMessage: Specific message type that represents input from a human user, contains content and optional metadata
 from langchain_core.messages import BaseMessage, HumanMessage
+# Command type for controlling agent workflow transitions:
+# - Used to update state and determine the next node to execute in a workflow graph
 from langgraph.types import Command
+# Type annotation for explicitly defining allowed literal values
 from typing import Literal
+# Graph components for building multi-agent systems with state management:
+# - MessagesState: Maintains the conversation history between agents
+# - StateGraph: Defines the workflow structure and transitions between different agents
+# - START: Special constant marking the entry point of a graph
+# - END: Special constant marking the termination point of a graph
 from langgraph.graph import MessagesState, StateGraph, START, END
 
 
