@@ -14,7 +14,7 @@ We’ll guide 🤝 you through building a retrieval augmented generation (RAG)-p
 
 Follow along with our [Workshop Slides](https://docs.google.com/presentation/d/1khUfbhE8ZyN5XE8w-zFW5AnMIov4grH43iF2zcBU43c/edit) and with the code for the demos located inside of this repository!
 
-## How to Clone This Repo on Your Local Machine!
+## How to Clone This Repo on Your Local Machine
 1. Click the Green **"<> Code"** Button
 2. Copy the Repository URL
 3. Open a New Window in VSCode
